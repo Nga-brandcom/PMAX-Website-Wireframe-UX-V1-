@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PMAX — Website Revamp Wireframe & UX Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,800&display=swap" rel="stylesheet">
+<style>
+  /* PMAX Brand Guideline 2025 — palette locked */
+  :root{
+    --blue:#0000FF;          /* Pantone Blue 072 C — primary */
+    --azure:#0080FF;         /* Pantone Medium Blue C */
+    --aqua:#00FFFF;          /* Pantone 305 C */
+    --red:#FF0000;           /* Pantone 185 C */
+    --v-orange:#FF6000;      /* Pantone Orange 021 C */
+    --orange:#FFA500;        /* Pantone 1375 C */
+    /* working tokens, mapped to brand */
+    --ink:#0A0A0A;
+    --ink-2:#1F2937;
+    --paper:#FFFFFF;
+    --paper-2:#FFFFFF;
+    --line:#D9DCE0;
+    --muted:#5B6470;
+    --accent:var(--red);
+    --accent-soft:#FFE5E5;
+    --sub:#F2F3F5;
+    --dark:var(--blue);
+    --blue-tint:#B3D9FF;
+    --shadow:0 1px 2px rgba(0,0,255,0.04), 0 8px 24px rgba(0,0,255,0.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Archivo','Inter','Helvetica Neue',Arial,sans-serif;font-stretch:semi-expanded;-webkit-font-smoothing:antialiased}
+  body{padding:48px 24px 96px}
+  h1,h2,h3,h4{font-family:'Archivo','Arial Black','Helvetica Neue',Arial,sans-serif;font-weight:800;font-stretch:expanded;letter-spacing:-0.01em;margin:0}
+  .wrap{max-width:1240px;margin:0 auto}
+  .eyebrow{display:inline-block;font-size:11px;letter-spacing:0.22em;font-weight:800;color:var(--red);text-transform:uppercase}
+
+  /* PMAX symbol — 5 diamond-shaped parallelograms */
+  .pmax-mark{display:inline-flex;align-items:flex-end;gap:2px;height:38px}
+  .pmax-mark span{display:inline-block;width:7px;transform:skewX(-15deg);border-radius:1px}
+  .pmax-mark .d1{background:var(--blue);height:100%}
+  .pmax-mark .d2{background:var(--azure);height:60%}
+  .pmax-mark .d3{background:var(--aqua);height:100%}
+  .pmax-mark .d4{background:var(--red);height:60%}
+  .pmax-mark .d5{background:var(--v-orange);height:100%}
+  .pmax-lockup{display:flex;align-items:center;gap:14px}
+  .pmax-lockup .name{font-family:'Archivo','Arial Black',sans-serif;font-weight:900;font-stretch:expanded;font-size:26px;color:#fff;letter-spacing:0.02em;line-height:1}
+  .pmax-lockup.dark .name{color:var(--blue)}
+  .pmax-tagline{font-size:10px;letter-spacing:0.32em;font-weight:800;color:#fff;text-transform:uppercase;margin-top:8px}
+
+  .cover{background:var(--blue);color:#fff;border-radius:0;padding:64px 56px 48px;margin-bottom:48px;position:relative;overflow:hidden}
+  .cover h1{font-family:'Archivo','Arial Black',sans-serif;font-size:88px;font-weight:900;font-stretch:expanded;line-height:0.95;color:#fff;margin-top:32px;text-transform:uppercase;letter-spacing:-0.02em}
+  .cover .sub{font-family:'Archivo','Arial',sans-serif;font-style:italic;color:#fff;font-size:22px;margin-top:18px;max-width:760px;font-weight:400}
+  .cover .accent-rule{width:80px;height:5px;background:var(--red);margin-top:24px}
+  .cover .desc{margin-top:14px;font-size:14px;color:#fff;max-width:760px}
+  .cover .meta{margin-top:48px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#fff;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+  .cover .meta .rule{flex:1;height:1px;background:#fff;margin:0 18px;opacity:0.6}
+  .cover .eyebrow{color:#fff;opacity:0.95}
+
+  .section{margin:72px 0 0}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--blue);padding-bottom:18px;margin-bottom:32px}
+  .section-head h2{font-size:32px;letter-spacing:-0.01em;text-transform:uppercase;color:var(--ink)}
+  .section-head .num{font-family:'Archivo','Arial',sans-serif;font-weight:800;font-size:11px;color:var(--blue);letter-spacing:0.22em;text-transform:uppercase}
+  .lede{font-family:'Archivo','Inter','Helvetica Neue',Arial,sans-serif;font-weight:400;font-style:italic;color:var(--muted);font-size:16px;line-height:1.6;max-width:880px;margin:0 0 32px}
+
+  /* SITEMAP TREE */
+  .sitemap{background:#fff;border:1px solid var(--line);border-radius:6px;padding:36px;box-shadow:var(--shadow)}
+  .smap-home{display:flex;justify-content:center;margin-bottom:14px}
+  .smap-home .node{background:var(--accent);color:#fff;padding:12px 28px;border-radius:4px;font-weight:700;letter-spacing:0.06em;font-size:13px}
+  .smap-connect{height:30px;display:flex;justify-content:center;position:relative}
+  .smap-connect::before{content:"";width:2px;height:100%;background:var(--accent)}
+  .smap-bar{height:2px;background:var(--line);margin:0 8.33%;position:relative}
+  .smap-cols{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:-2px}
+  .smap-col{display:flex;flex-direction:column}
+  .smap-col .stem{height:24px;width:2px;background:var(--line);margin:0 auto}
+  .smap-col .head{background:var(--blue);color:#fff;padding:14px 12px;text-align:center;border-radius:4px 4px 0 0}
+  .smap-col .head .t{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-size:15px;font-weight:700}
+  .smap-col .head .sub{font-style:italic;color:var(--accent);font-size:11px;margin-top:4px}
+  .smap-col .items{background:#fff;border:1px solid var(--line);border-top:0;padding:10px 0;border-radius:0 0 4px 4px}
+  .smap-col .items li{list-style:none;padding:7px 14px;font-size:12.5px;color:var(--ink);border-bottom:1px dashed var(--line)}
+  .smap-col .items li:last-child{border-bottom:0}
+
+  /* USER FLOW */
+  .flow{background:#fff;border:1px solid var(--line);border-radius:6px;padding:36px;box-shadow:var(--shadow)}
+  .flow-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:stretch;position:relative;margin-bottom:22px}
+  .flow-row:last-child{margin-bottom:0}
+  .flow-step{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px;position:relative}
+  .flow-step .n{position:absolute;top:-10px;left:14px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:0.08em}
+  .flow-step h4{font-size:14px;margin-bottom:6px}
+  .flow-step p{margin:0;font-size:12px;color:var(--muted);line-height:1.5}
+  .flow-arrow{position:absolute;top:50%;transform:translateY(-50%);right:-18px;color:var(--accent);font-size:18px;font-weight:700;z-index:2}
+  .flow-step:not(:last-child)::after{content:"→";position:absolute;right:-14px;top:42%;color:var(--accent);font-size:20px;font-weight:700}
+
+  /* WIREFRAME COMMON */
+  .wf-wrap{display:grid;grid-template-columns:1fr 360px;gap:28px;margin-bottom:48px;align-items:start}
+  .wf-wrap.single{grid-template-columns:1fr}
+  .wf-frame{background:#fff;border-radius:10px;border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow)}
+  .wf-chrome{background:#F1F2F4;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+  .wf-dot{width:11px;height:11px;border-radius:50%}
+  .wf-dot.r{background:#FF6058}.wf-dot.y{background:#FFBE2D}.wf-dot.g{background:#28C941}
+  .wf-url{font-size:11px;color:var(--muted);margin-left:auto;background:#fff;padding:4px 14px;border-radius:99px;border:1px solid var(--line)}
+  .wf-nav{background:var(--blue);color:#fff;padding:12px 24px;display:flex;align-items:center;gap:20px;font-size:11px;letter-spacing:0.18em;font-weight:700;text-transform:uppercase}
+  .wf-nav .logo{color:#fff;font-family:'Archivo','Arial Black',sans-serif;font-weight:900;font-size:16px;letter-spacing:0.04em}
+  .wf-nav .links{display:flex;gap:18px;flex:1;justify-content:center}
+  .wf-nav .cta{background:var(--accent);color:#fff;padding:6px 14px;border-radius:3px;font-size:11px}
+
+  .wf-block{padding:18px 24px;border-bottom:1px solid var(--line)}
+  .wf-block:last-child{border-bottom:0}
+  .wf-block .label{font-size:10px;letter-spacing:0.16em;font-weight:700;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+  .wf-block h3{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-size:18px;margin-bottom:6px}
+
+  .hero-block{background:var(--blue);color:#fff;padding:44px 32px}
+  .hero-block .label{color:var(--v-orange)}
+  .hero-block .pov{font-family:'Archivo','Arial Black',sans-serif;font-weight:900;font-style:normal;font-size:30px;line-height:1.1;color:#fff;max-width:780px;text-transform:uppercase;letter-spacing:-0.01em}
+  .hero-block .desc{color:#fff;opacity:0.9;font-size:13px;margin-top:14px;max-width:680px;font-style:italic}
+  .hero-block .ctas{margin-top:18px;display:flex;gap:8px}
+  .hero-block .btn{padding:8px 16px;font-size:11px;font-weight:700;border-radius:3px}
+  .hero-block .btn.primary{background:var(--accent);color:#fff}
+  .hero-block .btn.ghost{background:transparent;color:#fff;border:1px solid #fff}
+
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+  .tile{background:var(--sub);border:1px solid var(--line);border-radius:4px;aspect-ratio:4/3;display:flex;align-items:flex-end;padding:10px;font-size:11px;font-weight:700;color:var(--ink)}
+  .tile small{display:block;color:var(--muted);font-weight:400;font-size:10px;margin-top:2px}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:14px;font-size:12px}
+  .card .tag{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px}
+  .card .ttl{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-size:13px;font-weight:700}
+  .card .meta{color:var(--muted);font-size:10px;margin-top:6px}
+
+  .industries-strip{background:var(--sub);display:flex;flex-wrap:wrap;gap:6px;padding:14px 20px;border-radius:4px;margin-top:10px}
+  .industries-strip span{font-size:11px;background:#fff;padding:6px 12px;border-radius:99px;border:1px solid var(--line);color:var(--ink)}
+
+  .leaders-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+  .leader{background:var(--sub);border-radius:4px;padding:12px;font-size:11px}
+  .leader .ph{background:#D1D5DB;border-radius:50%;width:36px;height:36px;margin-bottom:6px}
+  .leader .nm{font-weight:700;font-size:11px}
+  .leader .rl{color:var(--muted);font-size:10px}
+
+  /* ANNOTATIONS PANEL */
+  .annot{background:var(--blue);color:#fff;border-radius:10px;padding:24px;box-shadow:var(--shadow);position:sticky;top:20px}
+  .annot h4{color:#fff;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:10px;margin-bottom:14px}
+  .annot ol{margin:0;padding-left:18px}
+  .annot li{font-size:12px;line-height:1.55;color:#E5E7EB;margin-bottom:12px}
+  .annot li b{color:#fff;display:block;margin-bottom:2px;font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-style:italic;font-size:13px;font-weight:400}
+  .annot .gold{color:var(--v-orange)}
+
+  /* INNER PAGE WIREFRAMES — case study & solution */
+  .two-up{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media (max-width:920px){.two-up,.wf-wrap{grid-template-columns:1fr}.annot{position:static}.smap-cols,.flow-row{grid-template-columns:1fr 1fr}.grid-4{grid-template-columns:1fr 1fr}}
+
+  /* CASE STUDY */
+  .cs-hero{background:var(--blue);color:#fff;padding:28px}
+  .cs-hero .ind{color:var(--accent);font-size:10px;letter-spacing:0.14em;font-weight:700;text-transform:uppercase}
+  .cs-hero h3{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-size:22px;color:#fff;margin-top:6px}
+  .cs-hero .lead{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-style:italic;color:var(--blue-tint);font-size:16px;margin-top:6px}
+  .cs-hero .meta{color:#9CA3AF;font-size:11px;margin-top:14px}
+  .metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:18px 20px;background:var(--accent-soft)}
+  .metric{text-align:center;padding:8px}
+  .metric .n{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-size:28px;font-weight:700;color:var(--accent);line-height:1}
+  .metric .l{font-size:10px;color:var(--ink);margin-top:4px}
+  .story-row{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:14px 24px;border-bottom:1px solid var(--line)}
+  .story-row .lbl{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding-top:4px}
+  .story-row .body{background:var(--sub);border:1px solid var(--line);border-radius:3px;padding:12px;font-size:12px;color:var(--muted);font-style:italic}
+
+  /* SOLUTION PAGE */
+  .sol-hero{padding:28px}
+  .sol-hero h3{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-size:22px}
+  .sol-hero .lead{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-style:italic;color:var(--muted);font-size:14px;margin-top:6px}
+  .sol-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .sol-tile{background:#fff;border:1px solid var(--line);border-radius:3px;padding:10px 12px;font-size:11.5px;color:var(--ink)}
+  .footer-cta{background:var(--accent);color:#fff;text-align:center;padding:14px;font-size:12px;font-weight:700;letter-spacing:0.05em}
+
+  /* INSIGHTS / INDUSTRY pages */
+  .ind-hero{background:var(--blue);color:#fff;padding:28px}
+  .ind-hero .stamp{color:var(--accent);font-size:10px;letter-spacing:0.16em;font-weight:700;text-transform:uppercase}
+  .ind-hero h3{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;color:#fff;font-size:24px;margin-top:6px}
+  .ind-hero .lead{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-style:italic;color:var(--blue-tint);font-size:14px;margin-top:6px;max-width:600px}
+
+  .grid-equation{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:20px 24px}
+  .eq-card{background:var(--sub);border:1px solid var(--line);border-radius:3px;padding:14px}
+  .eq-card .top{font-size:9px;color:var(--accent);font-weight:700;letter-spacing:0.14em;text-transform:uppercase}
+  .eq-card .ttl{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-size:13px;font-weight:700;margin-top:4px}
+  .eq-card .desc{font-size:10.5px;color:var(--muted);margin-top:5px;line-height:1.5}
+
+  /* mini legend */
+  .legend{background:#fff;border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin-top:24px;box-shadow:var(--shadow)}
+  .legend h4{font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);margin-bottom:10px}
+  .legend .row{display:flex;gap:18px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+  .legend .row b{color:var(--ink);font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-style:italic;font-weight:400}
+
+  /* PAGE TEMPLATES STRIP */
+  .templates{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+  .templ{background:#fff;border:1px solid var(--line);border-radius:6px;padding:20px;box-shadow:var(--shadow)}
+  .templ .n{font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-size:13px;color:var(--accent);font-weight:700;letter-spacing:0.06em}
+  .templ h4{font-size:16px;margin-top:6px}
+  .templ p{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.55}
+  .templ ul{margin:10px 0 0;padding-left:18px;font-size:11.5px;color:var(--ink)}
+  .templ ul li{margin-bottom:4px}
+
+  /* CLOSING */
+  .closing{background:var(--blue);color:#fff;border-radius:0;padding:56px 48px;margin-top:72px;text-align:center;position:relative}
+  .closing h2{font-family:'Archivo','Arial Black',sans-serif;font-weight:900;font-size:34px;color:#fff;text-transform:uppercase;letter-spacing:-0.01em}
+  .closing p{font-family:'Archivo','Inter',sans-serif;font-weight:400;font-style:italic;color:#fff;opacity:0.92;margin-top:18px;max-width:720px;margin-left:auto;margin-right:auto;font-size:16px}
+  .closing .accent-rule{width:60px;height:4px;background:var(--red);margin:18px auto 0}
+
+  @media print {
+    body{padding:0}
+    .annot{position:static}
+    .section{page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <div class="pmax-lockup">
+      <div class="pmax-mark"><span class="d1"></span><span class="d2"></span><span class="d3"></span><span class="d4"></span><span class="d5"></span></div>
+      <div class="name">PMAX</div>
+    </div>
+    <div class="pmax-tagline">TOTAL MARKETING PARTNER</div>
+    <span class="eyebrow" style="margin-top:32px;display:inline-block;color:#fff">WEBSITE REVAMP</span>
+    <h1>WIREFRAME &amp;<br/>UX BLUEPRINT</h1>
+    <div class="accent-rule"></div>
+    <div class="sub">Annotated screen architecture for the new pmax.com.vn — sitemap, user flow, homepage and core inner pages.</div>
+    <div class="desc">For design partner brief · prepared by Nga Đào, BrandCom Lead.</div>
+    <div class="meta"><span>PMAX BRAND · 2025</span><span class="rule"></span><span>MAY 2026</span></div>
+  </div>
+
+  <!-- 1. SITEMAP -->
+  <section class="section">
+    <div class="section-head">
+      <h2>01 · Sitemap</h2>
+      <div class="num">SITE ARCHITECTURE</div>
+    </div>
+    <p class="lede">Primary navigation leads with "What We Believe" and "Industries We Serve" — both absent from the current site. Services remain discoverable but no longer dominate the entry experience. The aim: a CMO landing here knows in five seconds what we believe and what kind of partner we are.</p>
+
+    <div class="sitemap">
+      <div class="smap-home"><div class="node">HOMEPAGE</div></div>
+      <div class="smap-connect"></div>
+      <div class="smap-bar"></div>
+      <div class="smap-cols">
+        <div class="smap-col">
+          <div class="stem"></div>
+          <div class="head"><div class="t">What We Believe</div><div class="sub">POV · Manifesto</div></div>
+          <ul class="items">
+            <li>Our Thesis</li>
+            <li>Vietnam Marketing 2026</li>
+            <li>Why "Total Marketing Partner"</li>
+            <li>Founder Voices</li>
+          </ul>
+        </div>
+        <div class="smap-col">
+          <div class="stem"></div>
+          <div class="head"><div class="t">What We Do</div><div class="sub">Capabilities</div></div>
+          <ul class="items">
+            <li>Brand Communications</li>
+            <li>Media Integration</li>
+            <li>E-commerce &amp; MCN</li>
+            <li>Marketing Consulting</li>
+            <li>AI Solutions (Growsure)</li>
+          </ul>
+        </div>
+        <div class="smap-col">
+          <div class="stem"></div>
+          <div class="head"><div class="t">Industries</div><div class="sub">Buyer entry</div></div>
+          <ul class="items">
+            <li>FMCG</li>
+            <li>Finance &amp; Banking</li>
+            <li>Retail &amp; E-com</li>
+            <li>Beauty &amp; Lifestyle</li>
+            <li>Auto &amp; Mobility</li>
+            <li>Education</li>
+          </ul>
+        </div>
+        <div class="smap-col">
+          <div class="stem"></div>
+          <div class="head"><div class="t">Our Work</div><div class="sub">Case studies</div></div>
+          <ul class="items">
+            <li>Featured</li>
+            <li>Filter by Industry</li>
+            <li>Filter by Outcome</li>
+            <li>Awards &amp; Recognition</li>
+          </ul>
+        </div>
+        <div class="smap-col">
+          <div class="stem"></div>
+          <div class="head"><div class="t">Our Thinking</div><div class="sub">Authority engine</div></div>
+          <ul class="items">
+            <li>Reports &amp; eBooks</li>
+            <li>Frameworks</li>
+            <li>Events &amp; Webinars</li>
+            <li>Newsroom</li>
+            <li>Subscribe</li>
+          </ul>
+        </div>
+        <div class="smap-col">
+          <div class="stem"></div>
+          <div class="head"><div class="t">About PMAX</div><div class="sub">People · Culture</div></div>
+          <ul class="items">
+            <li>Leadership</li>
+            <li>Our Story</li>
+            <li>Careers</li>
+            <li>PMAX Academy</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. USER FLOW -->
+  <section class="section">
+    <div class="section-head">
+      <h2>02 · Primary user flow</h2>
+      <div class="num">CMO RESEARCH JOURNEY</div>
+    </div>
+    <p class="lede">A typical enterprise buyer doesn't land on a service page first — they land via a search, a referral, or thought-leadership content. The journey moves from <b>belief</b> → <b>proof</b> → <b>fit</b> → <b>conversation</b>. Every page on the site exists to advance one of these steps.</p>
+
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-step">
+          <span class="n">01 · TRIGGER</span>
+          <h4>Discovery</h4>
+          <p>SEO query · referral · LinkedIn post · event · paid campaign · word of mouth.</p>
+        </div>
+        <div class="flow-step">
+          <span class="n">02 · BELIEF</span>
+          <h4>Read the POV</h4>
+          <p>Homepage thesis, manifesto page, or featured insight establishes PMAX has something to say.</p>
+        </div>
+        <div class="flow-step">
+          <span class="n">03 · PROOF</span>
+          <h4>See the work</h4>
+          <p>One featured case study with business outcome convinces them this isn't theory.</p>
+        </div>
+        <div class="flow-step">
+          <span class="n">04 · FIT</span>
+          <h4>Find relevance</h4>
+          <p>Industry page or solution page shows PMAX understands their sector and need.</p>
+        </div>
+        <div class="flow-step">
+          <span class="n">05 · ACT</span>
+          <h4>Engage</h4>
+          <p>Brief us · book a session · subscribe to insights · join the team. Segmented CTA.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <h4>Three intent paths the site must serve</h4>
+      <div class="row">
+        <div><b>Research-mode</b> — read, download, subscribe. CTA = thinking subscription.</div>
+        <div><b>Evaluate-mode</b> — compare, validate, qualify. CTA = book strategy session.</div>
+        <div><b>Brief-mode</b> — RFP, partnership, urgent need. CTA = brief us / contact lead.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. HOMEPAGE WIREFRAME -->
+  <section class="section">
+    <div class="section-head">
+      <h2>03 · Homepage wireframe</h2>
+      <div class="num">PRIMARY ENTRY</div>
+    </div>
+    <p class="lede">The homepage is the strategic spine of the site. It must do four things in eight seconds: state the PMAX point of view, prove it with named work, signal industry depth, and invite the next step. No service taxonomy at the top, no budget-tier form.</p>
+
+    <div class="wf-wrap">
+      <div class="wf-frame">
+        <div class="wf-chrome">
+          <div class="wf-dot r"></div><div class="wf-dot y"></div><div class="wf-dot g"></div>
+          <div class="wf-url">pmax.com.vn</div>
+        </div>
+        <div class="wf-nav">
+          <span class="logo">PMAX</span>
+          <span class="links"><span>BELIEVE</span><span>WHAT WE DO</span><span>INDUSTRIES</span><span>WORK</span><span>THINKING</span><span>ABOUT</span></span>
+          <span class="cta">Talk to us</span>
+        </div>
+
+        <div class="hero-block">
+          <span class="label">HERO · POV</span>
+          <div class="pov" style="margin-top:10px">"Marketing in Vietnam is now a business-design problem.<br/>We help leadership brands turn that problem into commercial growth."</div>
+          <div class="desc">A single ownable thesis — the PMAX belief, delivered as a manifesto, not a tagline. Becomes the strategic spine for every other page.</div>
+          <div class="ctas">
+            <span class="btn primary">Read our thesis →</span>
+            <span class="btn ghost">See our work →</span>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">FEATURED WORK · 4 hero cases</div>
+          <div class="grid-4">
+            <div class="tile">VinFast<small>Brand · Auto</small></div>
+            <div class="tile">FE Credit<small>Performance · Finance</small></div>
+            <div class="tile">Vietjet<small>Real-time · Aviation</small></div>
+            <div class="tile">VAS<small>Brand · Education</small></div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">INDUSTRIES WE SERVE</div>
+          <div class="industries-strip">
+            <span>FMCG</span><span>Finance &amp; Banking</span><span>Retail &amp; E-commerce</span><span>Beauty &amp; Lifestyle</span><span>Auto &amp; Mobility</span><span>Education</span>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">LATEST THINKING</div>
+          <div class="grid-3">
+            <div class="card"><div class="tag">eBook</div><div class="ttl">Brand Transformation 2026</div><div class="meta">15 min · with Paula's Choice VN</div></div>
+            <div class="card"><div class="tag">Framework</div><div class="ttl">The Vietnamese MMM playbook</div><div class="meta">9 min · Long Lê &amp; PMAX</div></div>
+            <div class="card"><div class="tag">Report</div><div class="ttl">AI in Compliance for Finance</div><div class="meta">12 min · Growsure team</div></div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">LEADERSHIP &amp; CULTURE</div>
+          <div class="leaders-row">
+            <div class="leader"><div class="ph"></div><div class="nm">Long Lê</div><div class="rl">CEO, Co-Founder</div></div>
+            <div class="leader"><div class="ph"></div><div class="nm">Hạnh Lê</div><div class="rl">COO, Co-Founder</div></div>
+            <div class="leader"><div class="ph"></div><div class="nm">Nga Đào</div><div class="rl">Managing Director</div></div>
+            <div class="leader"><div class="ph"></div><div class="nm">Việt Anh</div><div class="rl">Chief Transformation</div></div>
+          </div>
+        </div>
+
+        <div class="footer-cta">START THE CONVERSATION — Brief us  ·  Book a strategy session  ·  Subscribe to insights</div>
+      </div>
+
+      <aside class="annot">
+        <h4>Homepage — key moves</h4>
+        <ol>
+          <li><b>POV-led hero</b>One ownable sentence. No service list, no stat-block clutter.</li>
+          <li><b>Two-CTA model</b>Primary: read thesis. Secondary: see work. No budget form on first contact.</li>
+          <li><b>Work in row 2</b>Four hero case studies above the fold. The work is the credential.</li>
+          <li><b>Industry as nav</b>Sector pills as a buyer-led entry. CMOs find their world in one scroll.</li>
+          <li><b>Thinking as proof</b>Three pieces of original IP — eBooks, frameworks, reports. Not blog headlines.</li>
+          <li><b>Named leadership</b>Real faces, real voices. Trust signal for enterprise buyers.</li>
+          <li><b>Segmented closing CTA</b>Three intent paths in the final band — brief, book, subscribe.</li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 4. INNER PAGE — CASE STUDY -->
+  <section class="section">
+    <div class="section-head">
+      <h2>04 · Case study template</h2>
+      <div class="num">PROOF · INNER PAGE</div>
+    </div>
+    <p class="lede">Every featured case study follows the same rhythm: <b>headline outcome → metrics → challenge → approach → outcome → voice → next step</b>. The story is told around the client's business problem, not around PMAX's services.</p>
+
+    <div class="wf-wrap">
+      <div class="wf-frame">
+        <div class="wf-chrome"><div class="wf-dot r"></div><div class="wf-dot y"></div><div class="wf-dot g"></div><div class="wf-url">pmax.com.vn/work/fe-credit</div></div>
+
+        <div class="cs-hero">
+          <span class="ind">INDUSTRY · FINANCE &amp; BANKING</span>
+          <h3>Cross-selling with real-time data:<br/>how FE Credit lifted conversions 3.4×.</h3>
+          <div class="lead">A performance + data partnership in one of Vietnam's most complex consumer-finance journeys.</div>
+          <div class="meta">Client: FE Credit  ·  Year: 2023  ·  Award: MMA Smarties Gold · Duration: 12 months</div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric"><div class="n">3.4×</div><div class="l">conversion lift</div></div>
+          <div class="metric"><div class="n">+38%</div><div class="l">ROAS improvement</div></div>
+          <div class="metric"><div class="n">−42%</div><div class="l">customer acquisition cost</div></div>
+        </div>
+
+        <div class="story-row">
+          <div class="lbl">Challenge</div>
+          <div class="body">[ The commercial problem — narrative, ~120 words, written from FE Credit's perspective. ]</div>
+        </div>
+        <div class="story-row">
+          <div class="lbl">Approach</div>
+          <div class="body">[ How PMAX integrated brand, performance, data, and creative. Diagram of approach. ~180 words. ]</div>
+        </div>
+        <div class="story-row">
+          <div class="lbl">Outcome</div>
+          <div class="body">[ Business outcome — quantitative + qualitative. Quote from the client. ~120 words. ]</div>
+        </div>
+        <div class="story-row">
+          <div class="lbl">Voice</div>
+          <div class="body">[ Embedded client testimonial card with name, title, headshot. ]</div>
+        </div>
+        <div class="story-row">
+          <div class="lbl">Related</div>
+          <div class="body">[ 3 related cases (Finance industry or Cross-selling capability). ]</div>
+        </div>
+
+        <div class="footer-cta">DISCUSS A SIMILAR ENGAGEMENT WITH OUR INDUSTRY LEAD →</div>
+      </div>
+
+      <aside class="annot">
+        <h4>Case study — design rules</h4>
+        <ol>
+          <li><b>Outcome first</b>Headline carries the result. Don't bury the metric.</li>
+          <li><b>Metric strip up front</b>Three numbers, ranked by business meaning — not three vanity awards.</li>
+          <li><b>Client perspective</b>Tell the story from the client's problem, not from PMAX's process.</li>
+          <li><b>One quote, real face</b>One named, photographed client. No anonymous logos.</li>
+          <li><b>Industry lead CTA</b>Close with a specific named contact for that industry, not a generic form.</li>
+          <li><b>Re-rankable</b>Filter taxonomy: industry · capability · outcome type · year · award.</li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 5. INNER PAGE — INDUSTRY + SOLUTION (TWO-UP) -->
+  <section class="section">
+    <div class="section-head">
+      <h2>05 · Industry &amp; Solution templates</h2>
+      <div class="num">FIT · INNER PAGES</div>
+    </div>
+    <p class="lede">Two templates that mirror each other in rhythm but speak to different intents. <b>Industry pages</b> answer "do you understand my sector?" — <b>Solution pages</b> answer "what can you actually do?" Both lead with POV before listing services.</p>
+
+    <div class="two-up">
+      <!-- INDUSTRY PAGE -->
+      <div class="wf-frame">
+        <div class="wf-chrome"><div class="wf-dot r"></div><div class="wf-dot y"></div><div class="wf-dot g"></div><div class="wf-url">pmax.com.vn/industries/finance</div></div>
+
+        <div class="ind-hero">
+          <span class="stamp">INDUSTRY</span>
+          <h3>Finance &amp; Banking</h3>
+          <div class="lead">Why the growth equation for Vietnamese financial services in 2026 is no longer a media problem — it's an integration problem.</div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">THE GROWTH EQUATION</div>
+          <div class="grid-equation" style="padding:0;margin-top:6px">
+            <div class="eq-card">
+              <div class="top">FORCE 01</div>
+              <div class="ttl">Digital-first acquisition</div>
+              <div class="desc">[ Sector POV ~30 words ]</div>
+            </div>
+            <div class="eq-card">
+              <div class="top">FORCE 02</div>
+              <div class="ttl">Compliance pressure</div>
+              <div class="desc">[ Sector POV ~30 words ]</div>
+            </div>
+            <div class="eq-card">
+              <div class="top">FORCE 03</div>
+              <div class="ttl">Data orchestration</div>
+              <div class="desc">[ Sector POV ~30 words ]</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">CAPABILITIES APPLIED</div>
+          <div class="sol-grid">
+            <div class="sol-tile">Brand-performance integration</div>
+            <div class="sol-tile">Marketing Mix Modeling</div>
+            <div class="sol-tile">AI compliance (Growsure)</div>
+            <div class="sol-tile">Creative for performance</div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">PROOF · 3 CASES</div>
+          <div class="grid-3">
+            <div class="card"><div class="tag">FE Credit</div><div class="ttl">3.4× conversion lift</div></div>
+            <div class="card"><div class="tag">ZaloPay</div><div class="ttl">Tracking &amp; optimisation</div></div>
+            <div class="card"><div class="tag">FWD</div><div class="ttl">Holiday brand campaign</div></div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">INDUSTRY LEAD</div>
+          <div class="leaders-row" style="grid-template-columns:1fr">
+            <div class="leader" style="display:flex;gap:12px;align-items:center"><div class="ph"></div><div><div class="nm">Vân Anh</div><div class="rl">Growth Director — Finance &amp; Banking</div></div></div>
+          </div>
+        </div>
+
+        <div class="footer-cta">TALK TO OUR FINANCE TEAM →</div>
+      </div>
+
+      <!-- SOLUTION PAGE -->
+      <div class="wf-frame">
+        <div class="wf-chrome"><div class="wf-dot r"></div><div class="wf-dot y"></div><div class="wf-dot g"></div><div class="wf-url">pmax.com.vn/do/brand-communications</div></div>
+
+        <div class="sol-hero">
+          <span class="eyebrow">CAPABILITY</span>
+          <h3 style="margin-top:8px">Total Brand Communications</h3>
+          <div class="lead">How we turn brand investment into commercial growth — by integrating strategy, creative, media and measurement under one operating system.</div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">OUR POINT OF VIEW</div>
+          <div style="font-family:'Archivo','Arial Black',sans-serif;font-weight:800;font-style:italic;color:var(--ink);font-size:14px;line-height:1.55;padding:6px 0">
+            "Brand and performance shouldn't be separate budget lines. The brands winning in Vietnam treat them as one engine — measured by business outcomes, not vanity metrics."
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">WHAT WE DELIVER</div>
+          <div class="sol-grid">
+            <div class="sol-tile"><b>IMC Packages</b><br/><small style="color:var(--muted)">Launch · Product · Thematic · Repositioning</small></div>
+            <div class="sol-tile"><b>Total Media &amp; Data</b><br/><small style="color:var(--muted)">Strategy · Optimisation · MMM</small></div>
+            <div class="sol-tile"><b>Creative for Brand/Performance</b><br/><small style="color:var(--muted)">Identity · Film · AI content · CFP</small></div>
+            <div class="sol-tile"><b>Strategy &amp; Planning</b><br/><small style="color:var(--muted)">Brand audit · IMC planning · Content</small></div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">PROOF · 3 CASES</div>
+          <div class="grid-3">
+            <div class="card"><div class="tag">VAS</div><div class="ttl">4 years, leadership brand</div></div>
+            <div class="card"><div class="tag">Watsons</div><div class="ttl">6× revenue growth</div></div>
+            <div class="card"><div class="tag">Vsmart</div><div class="ttl">Top-3 market share</div></div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="label">SPECIALIST TEAM</div>
+          <div class="leaders-row" style="grid-template-columns:1fr 1fr">
+            <div class="leader" style="display:flex;gap:12px;align-items:center"><div class="ph"></div><div><div class="nm">Nga Đào</div><div class="rl">MD, BrandCom Lead</div></div></div>
+            <div class="leader" style="display:flex;gap:12px;align-items:center"><div class="ph"></div><div><div class="nm">Châu Đoàn</div><div class="rl">Associate Strategy Director</div></div></div>
+          </div>
+        </div>
+
+        <div class="footer-cta">BOOK A STRATEGY SESSION →</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PAGE TEMPLATE LIBRARY -->
+  <section class="section">
+    <div class="section-head">
+      <h2>06 · Template library</h2>
+      <div class="num">PAGES TO BUILD</div>
+    </div>
+    <p class="lede">Nine page templates cover the entire site. Every page in the system inherits from one of these — keeping the experience consistent and the build maintainable.</p>
+
+    <div class="templates">
+      <div class="templ"><div class="n">T01</div><h4>Homepage</h4><p>POV-led entry. Featured work. Industries. Thinking. Leadership.</p><ul><li>Hero (manifesto)</li><li>Featured work · 4</li><li>Industries strip</li><li>Latest thinking · 3</li><li>Leadership</li><li>Segmented CTAs</li></ul></div>
+
+      <div class="templ"><div class="n">T02</div><h4>Manifesto / Belief</h4><p>Long-form thesis page. Founder voices. Anchor content for SEO + advocacy.</p><ul><li>Thesis statement</li><li>3 core beliefs</li><li>Data &amp; sources</li><li>Founder POV</li><li>Download manifesto</li></ul></div>
+
+      <div class="templ"><div class="n">T03</div><h4>Solution / Capability</h4><p>One per capability area. POV → delivery → proof → team → CTA.</p><ul><li>Capability POV</li><li>What we deliver</li><li>Methodology</li><li>3 proof cases</li><li>Specialist team</li><li>Book session</li></ul></div>
+
+      <div class="templ"><div class="n">T04</div><h4>Industry</h4><p>Sector landing. Growth equation framing. Capabilities applied. Industry lead.</p><ul><li>Industry POV</li><li>3-force growth equation</li><li>Capabilities applied</li><li>3 proof cases</li><li>Industry lead</li></ul></div>
+
+      <div class="templ"><div class="n">T05</div><h4>Work hub</h4><p>Curated portfolio with filters. Featured + filterable + awards.</p><ul><li>Featured row</li><li>Filter by industry</li><li>Filter by outcome</li><li>Filter by capability</li><li>Awards section</li></ul></div>
+
+      <div class="templ"><div class="n">T06</div><h4>Case study</h4><p>Single story. Outcome-first. Metric strip. Five-block narrative.</p><ul><li>Outcome headline</li><li>Metrics strip · 3</li><li>Challenge</li><li>Approach</li><li>Outcome</li><li>Client voice</li><li>Related</li></ul></div>
+
+      <div class="templ"><div class="n">T07</div><h4>Thinking hub</h4><p>Authority engine. Reports, eBooks, frameworks, events. Filterable.</p><ul><li>Featured report</li><li>Frameworks</li><li>eBooks &amp; reports</li><li>Events &amp; webinars</li><li>Expert voices</li><li>Subscribe</li></ul></div>
+
+      <div class="templ"><div class="n">T08</div><h4>Article / Insight</h4><p>Long-read template. Named expert byline. Related content engine.</p><ul><li>Author byline</li><li>TL;DR summary</li><li>Long-form body</li><li>Pull quotes</li><li>Related work</li><li>Subscribe</li></ul></div>
+
+      <div class="templ"><div class="n">T09</div><h4>Contact / Engage</h4><p>Segmented intent capture. Three paths, not one form.</p><ul><li>Brief us (RFP)</li><li>Partnership</li><li>Careers</li><li>Press &amp; media</li><li>General enquiry</li></ul></div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="pmax-lockup" style="justify-content:center">
+      <div class="pmax-mark"><span class="d1"></span><span class="d2"></span><span class="d3"></span><span class="d4"></span><span class="d5"></span></div>
+      <div class="name">PMAX</div>
+    </div>
+    <div class="pmax-tagline" style="margin-top:6px">TOTAL MARKETING PARTNER</div>
+    <span class="eyebrow" style="margin-top:36px;display:inline-block;color:#fff">ONE LINE TO REMEMBER</span>
+    <h2 style="margin-top:14px">EVERY PAGE IS A<br/>STRATEGIC CONVERSATION.</h2>
+    <div class="accent-rule"></div>
+    <p>POV → Proof → Action. No page is a brochure. Every screen earns the next click — and moves a senior buyer one step closer to the right conversation with PMAX.</p>
+  </div>
+
+</div>
+</body>
+</html>
